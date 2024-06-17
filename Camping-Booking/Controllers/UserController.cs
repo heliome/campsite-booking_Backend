@@ -176,6 +176,10 @@ namespace Camping_Booking.Controllers
                 if (user == null || user.Password != updateEmailRequest.OldPassword)
                 {
                     return Unauthorized(new { message = "Invalid old password." });
+                } 
+                else if (user == null || _userData.IsEmailUsed(updateEmailRequest.Email))
+                {
+                    return BadRequest(new { message = "Email is already in use." });
                 }
 
                 user.Email = updateEmailRequest.Email;
