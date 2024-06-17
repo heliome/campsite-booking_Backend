@@ -60,7 +60,6 @@ namespace Camping_Booking.Controllers
                 if (userId.HasValue)
                 {
                     var token = _tokenData.GenerateJwtToken(userId.Value);
-                    _tokenData.StoreTokenInDatabase(token);
                     return Ok(new { token = token.TokenValue });
                 }
                 else

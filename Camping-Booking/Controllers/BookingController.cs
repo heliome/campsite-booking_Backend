@@ -52,12 +52,14 @@ namespace Camping_Booking.Controllers
 
                 var futureBookings = allBookings
                     .Where(b => b.TimeStart > today && b.Active && b.ActiveOwner)
+                    .OrderBy(b => b.TimeStart)
                     .Skip((request.PageNumber - 1) * request.PageSize)
                     .Take(request.PageSize)
                     .ToList();
 
                 var pastBookings = allBookings
                     .Where(b => (b.TimeEnd < today) || (b.Active == false) || ( b.ActiveOwner == false))
+                    .OrderByDescending(b => b.TimeStart)
                     .Skip((request.PageNumber - 1) * request.PageSize)
                     .Take(request.PageSize)
                     .ToList();
